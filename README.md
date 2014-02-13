@@ -43,4 +43,4 @@ Enter password for vCenter 192.100.200.192 for user vma:
 2014-02-13 16:09:35,776 WARNING Written CSV file to /home/vi-admin/scripts/pysphere
 ```
 
-[More info] (http://jose-manuel.me/2014/02/reporting-vmware-tools-version-installed-vmware_vmtools-py/) 
+More info in my [blog] (http://jose-manuel.me/2014/02/reporting-vmware-tools-version-installed-vmware_vmtools-py/) 
