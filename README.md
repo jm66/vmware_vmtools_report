@@ -35,3 +35,12 @@ optional arguments:
                         File to log to (default = stdout)
   -V, --version         show program's version number and exit
 ```
+For instance, you can simply run the script with the minimum input parameters:
+
+``` bash
+./vmware_vmtools_report.py -s 192.100.200.192 -u vma -n -D `pwd` -f vmware_tools-2014-02-13 
+Enter password for vCenter 192.100.200.192 for user vma: 
+2014-02-13 16:09:35,776 WARNING Written CSV file to /home/vi-admin/scripts/pysphere
+```
+
+[More info] (http://jose-manuel.me/2014/02/reporting-vmware-tools-version-installed-vmware_vmtools-py/) 
