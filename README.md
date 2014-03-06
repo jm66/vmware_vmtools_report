@@ -1,4 +1,4 @@
-vmware_vmtools_report
+vmtools_report
 =====================
 
 Another pysphere implementation to get a report of the VMware Tools package in each Virtual Machine. 
