@@ -53,7 +53,7 @@ def write_vmw_tools(con, logger, c, cnt):
 	
         	admin = get_admin(ann)
 
-        	if tools_version == "":
+        	if tools_version == "" or tools_version == '0':
         		tools_version = "No tools installed"
         		if notools:
                     		if cnt is not None:
