@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import logging, csv, sys, re, getpass, argparse, subprocess
+import logging, sys, re, getpass, argparse, pprint, csv, time
 from pysphere import MORTypes, VIServer, VITask, VIProperty, VIMor, VIException
 from pysphere.vi_virtual_machine import VIVirtualMachine
 
@@ -11,12 +11,16 @@ def set_dir():
 		return directory
 	else:
 		return '/tmp'
-def set_filename():
-	if filename:
-		return filename
-	else:
-		csvfile = raw_input("csv filename: ")
-		return csvfile
+
+def set_filename(filename):
+        if filename:
+                return filename + getDateSuffix()
+        else:
+                logger.info('Using default filename vsphere-inventory')
+                return 'vmware-tools-report' + getDateSuffix()
+
+def getDateSuffix():
+  return '_'+time.strftime("%Y-%m-%d")
 
 def get_admin(annotation):
         if annotation == "":
@@ -78,11 +82,11 @@ def get_args():
     parser.add_argument('-p', '--password', nargs=1, required=False, help='The password with which to connect to the host. If not specified, the user is prompted at runtime for a password', dest='password', type=str)
     parser.add_argument('-n', '--notools', required=False, help='No VMware Tools isntalled into separate file.', dest='notools', action='store_true')
     parser.add_argument('-D', '--dir', required=False, help='Written file(s) into a specific directory.', dest='directory', type=str)
-    parser.add_argument('-f', '--filename', required=False, help='File name. If not set, will be asked.', dest='filename', type=str)
+    parser.add_argument('-f', '--filename', required=False, help='File name. If not set, will be used vmware-tools-report.', dest='filename', type=str)
     parser.add_argument('-v', '--verbose', required=False, help='Enable verbose output', dest='verbose', action='store_true')
     parser.add_argument('-d', '--debug', required=False, help='Enable debug output', dest='debug', action='store_true')
     parser.add_argument('-l', '--log-file', nargs=1, required=False, help='File to log to (default = stdout)', dest='logfile', type=str)
-    parser.add_argument('-V', '--version', action='version', version="%(prog)s (version 0.2)")
+    parser.add_argument('-V', '--version', action='version', version="%(prog)s (version 0.3)")
 	
     args = parser.parse_args()
     return args
@@ -101,7 +105,7 @@ directory	= args.directory
 filename 	= args.filename
 
 # Setting output filename
-csvfile = set_filename()
+csvfile = set_filename(filename)
 
 # Setting output directory 
 dir = set_dir()
@@ -121,7 +125,9 @@ else:
     
 # Initializing logger
 if log_file:
-	logging.basicConfig(filename=log_file,format='%(asctime)s %(levelname)s %(message)s',level=log_level)
+    logfile = log_file + getDateSuffix() + '.log' 
+    logging.basicConfig(filename=logfile,format='%(asctime)s %(levelname)s %(message)s',level=log_level)
+    logger = logging.getLogger(__name__)
 else:
 	logging.basicConfig(filename=log_file,format='%(asctime)s %(levelname)s %(message)s',level=log_level)
 	logger = logging.getLogger(__name__)
