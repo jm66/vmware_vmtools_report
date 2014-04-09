@@ -1,4 +1,4 @@
-vmwaretools_report
+vmtools_report
 =====================
 
 Another pysphere implementation to get a report of the VMware Tools package in each Virtual Machine. 
@@ -7,7 +7,7 @@ password (not required), destination directory, filename of the report and final
 debug,  and if set output to an specific log. Sorry, it is certainly better to show the help message:
 
 ``` bash
-./vmware_vmtools_report.py -h
+./vmtools_report.py -h
 usage: vmware_vmtools_report.py [-h] -s SERVER -u USERNAME [-p PASSWORD] [-n]
                                 [-D DIRECTORY] [-f FILENAME] [-v] [-d]
                                 [-l LOGFILE] [-V]
@@ -38,7 +38,7 @@ optional arguments:
 For instance, you can simply run the script with the minimum input parameters:
 
 ``` bash
-./vmware_vmtools_report.py -s 192.100.200.192 -u vma -n -D `pwd` -f vmware_tools-2014-02-13 
+./vmtools_report.py -s 192.100.200.192 -u vma -n -D `pwd` -f vmware_tools
 Enter password for vCenter 192.100.200.192 for user vma: 
 2014-02-13 16:09:35,776 WARNING Written CSV file to /home/vi-admin/scripts/pysphere
 ```
